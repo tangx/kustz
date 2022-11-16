@@ -14,13 +14,13 @@ func (kz *Config) KubeDeployment() *appv1.Deployment {
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      kz.Name,
 			Namespace: kz.Namespace,
-			Labels:    CommonLabels(*kz),
+			Labels:    kz.CommonLabels(),
 		},
 		Spec: appv1.DeploymentSpec{
 			Replicas: &kz.Service.Replicas,
 			Template: kz.KubePod(),
 			Selector: &metav1.LabelSelector{
-				MatchLabels: CommonLabels(*kz),
+				MatchLabels: kz.CommonLabels(),
 			},
 		},
 	}

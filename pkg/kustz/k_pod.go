@@ -8,7 +8,7 @@ import (
 func (kz *Config) KubePod() corev1.PodTemplateSpec {
 	return corev1.PodTemplateSpec{
 		ObjectMeta: metav1.ObjectMeta{
-			Labels: CommonLabels(*kz),
+			Labels: kz.CommonLabels(),
 		},
 		Spec: corev1.PodSpec{
 			Containers: kz.KubeContainer(),
