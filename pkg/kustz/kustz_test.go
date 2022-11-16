@@ -11,8 +11,15 @@ func Test_Kustz(t *testing.T) {
 
 	kz := NewKustzFromConfig("./kustz.yml")
 
-	dep := kz.KubeDeployment()
-	b, err := kubeutils.YAMLMarshal(dep)
+	// dep := kz.KubeDeployment()
+	// output(dep)
+
+	svc := kz.KubeService()
+	output(svc)
+}
+
+func output(v any) {
+	b, err := kubeutils.YAMLMarshal(v)
 
 	if err != nil {
 		panic(err)

@@ -12,12 +12,6 @@ type Config struct {
 	Service   Service `json:"service"`
 }
 
-type Service struct {
-	Name     string `json:"name"`
-	Image    string `json:"image"`
-	Replicas int32  `json:"replicas"`
-}
-
 func NewKustzFromConfig(cfg string) *Config {
 	b, err := os.ReadFile(cfg)
 	if err != nil {
@@ -31,4 +25,11 @@ func NewKustzFromConfig(cfg string) *Config {
 	}
 
 	return kz
+}
+
+type Service struct {
+	Name     string   `json:"name"`
+	Image    string   `json:"image"`
+	Replicas int32    `json:"replicas"`
+	Ports    []string `json:"ports"`
 }

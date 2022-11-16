@@ -6,3 +6,8 @@ service:
   name: nginx
   image: docker.io/library/nginx:alpine
   replicas: 2
+
+  ports:
+    - "80:8080" # cluster ip
+    - "udp://!9998:8889" # 随机 nodeport
+    # - "!20080:80:8080" # 指定 nodeport
