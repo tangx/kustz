@@ -1,12 +1,34 @@
 package kustz
 
-type Kustz struct {
-	Namespace string  `yaml:"namespace"`
-	Service   Service `yaml:"service"`
+import (
+	"os"
+
+	"github.com/tangx/kustz/pkg/kubeutils"
+)
+
+type Config struct {
+	Name      string  `json:"name"`
+	Namespace string  `json:"namespace"`
+	Service   Service `json:"service"`
 }
 
 type Service struct {
-	Name     string `yaml:"name"`
-	Image    string `yaml:"image"`
-	Replicas int    `yaml:"replicas"`
+	Name     string `json:"name"`
+	Image    string `json:"image"`
+	Replicas int32  `json:"replicas"`
+}
+
+func NewKustzFromConfig(cfg string) *Config {
+	b, err := os.ReadFile(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	kz := &Config{}
+	err = kubeutils.YAMLUnmarshal(b, kz)
+	if err != nil {
+		panic(err)
+	}
+
+	return kz
 }

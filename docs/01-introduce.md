@@ -1,5 +1,13 @@
 # 介绍
 
+![logo](./img/kustz-logo.jpg)
+
+如果要在 Kubernets 发布一个应用， 并对外提供服务， 需要配置诸如 `Dep, Ing, Svc` 等 Config API。 
+他们之间又是通过 `Label` 组合选择而实现的 **松耦合**。
+
+1. 如果想要这些 Config API 之间的关系更加紧密， 我们可以自己再向上抽象， 通过自己的配置将他们整合在一起。
+2. 更重要的是， 我们可以通过这层抽象， 屏蔽不同版本 API 之间差异。 实现同一个 `kustz.yml` 配置兼容多版本集群， 实现部署或迁移的丝滑。
+
 ## Kustomize
 
 > kustomize: https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/

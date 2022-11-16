@@ -1,0 +1,58 @@
+
+namespace: demo-demo
+name: srv-webapp-demo
+
+service:
+  image: docker.io/library/nginx:alpine
+  replicas: 1
+  envs:
+    pairs:
+      key1: value1-123
+      key2: value2-123
+    secrets:
+      - srv-webapp-demo
+    configmaps:
+      - srv-webapp-demo:true
+  imagePullSecrets:
+    - aliyun-repo
+  resources:
+    cpu: 10m/20m
+    memory: 10Mi/20Mi
+
+  probes:
+    liveness:
+      action: http://:80/liveness
+      httpHeaders:
+        token: "token123"
+      initialDelaySeconds: 30 
+    startup:
+      action: tcp://0.0.0.0:3000
+    readiness:
+      action: cat /tmp/probe.txt
+
+  ports:
+    - "80:3000"       # cluster ip
+    # - "3000"          # cluster ip => equal to "3000:3000"
+    # - "!20080:80:3000"   # node port
+    # - "@example.com"  # external name
+    # - "#80:8080"      # headless of cluster ip 
+    # - "%80:8089"      # loadbalancer
+
+secrets:
+  envs:
+  # secret.txt: use kustomize to generate secret "srv-webapp-demo-02" from secret.txt
+  # basic: name=targetfile:type
+  - srv-webapp-demo=secret.txt
+  files:
+  - aliyun-repo=.dockerconfigjson=docker-registry.json:kubernetes.io/dockerconfigjson
+
+configmaps: # same rules with secret
+  envs:
+  - srv-webapp-demo
+
+ingress:
+  - http://www.example.com/*
+  # with * means pathType=Prefix
+  - http://www.example.com/api/*?tls=star-example-com # defualt backend is srv-webapp-demo
+  # without * means pathType=Exact
+  - http://api.example.com/api2/?tls=star-example-com&backend=srv-another-demo:3000
