@@ -2,8 +2,12 @@
 
 使用 `kustomize` 简化 kubernetes 服务部署和配置
 
-## `kustz.yml` 配置
 
+## 目录
+
+### 简介
+
++ [01. 简介](./docs/01-introduce.md)
 
 # 请一杯咖啡
 
