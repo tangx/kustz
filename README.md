@@ -2,6 +2,7 @@
 
 使用 `kustomize` 简化 kubernetes 服务部署和配置
 
+![logo](./docs/img/kustz-logo.jpg)
 
 ## 目录
 
