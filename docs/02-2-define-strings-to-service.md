@@ -1,5 +1,10 @@
 # 2.2. 定义字符串创建 Service
 
+![](./img/kustz-logo.jpg)
+
+> 大家好， 我是老麦， 一个小运维。
+> 今天我们为 kustz 增加 service 解析功能。
+
 通过 `kubectl create service` 命令可以看到， service 的模式还是挺多的。
 
 ```bash
@@ -253,3 +258,16 @@ func (p *PortString) toServiceNodePort(value string) {
 	p.Type = corev1.ServiceTypeNodePort
 }
 ```
+
+## 测试
+
+在 `/pkg/kustz/kustz_test.go` 中， 拆分了 test 规则。
+
+执行命令， 检查结果是不是和自己期待的一样。
+
+```bash
+$ go test -timeout 30s -run ^Test_KustzService$ ./pkg/kustz/ -v
+```
+
+如果不是， 就回去检查代码吧。
+

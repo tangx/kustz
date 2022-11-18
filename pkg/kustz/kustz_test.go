@@ -7,13 +7,16 @@ import (
 	"github.com/tangx/kustz/pkg/kubeutils"
 )
 
-func Test_Kustz(t *testing.T) {
+var (
+	kz = NewKustzFromConfig("./kustz.yml")
+)
 
-	kz := NewKustzFromConfig("./kustz.yml")
+func Test_KustzDeployment(t *testing.T) {
+	dep := kz.KubeDeployment()
+	output(dep)
+}
 
-	// dep := kz.KubeDeployment()
-	// output(dep)
-
+func Test_KustzService(t *testing.T) {
 	svc := kz.KubeService()
 	output(svc)
 }
