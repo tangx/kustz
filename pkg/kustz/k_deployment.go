@@ -12,9 +12,8 @@ func (kz *Config) KubeDeployment() *appv1.Deployment {
 			APIVersion: "apps/v1",
 		},
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      kz.Name,
-			Namespace: kz.Namespace,
-			Labels:    kz.CommonLabels(),
+			Name:   kz.Name,
+			Labels: kz.CommonLabels(),
 		},
 		Spec: appv1.DeploymentSpec{
 			Replicas: &kz.Service.Replicas,

@@ -12,7 +12,8 @@
 
 ### 创建 API
 
-+ [02. 模仿 kubectl create 创建 Deployment 样例](./docs/02-sample-deployment.md)
++ [2.1. 模仿 kubectl create 创建 Deployment 样例](./docs/02-1-sample-deployment.md)
++ [2.2. 定义字符串创建 Service](./docs/02-2-cluster-ip-service.md)
 
 # 请一杯咖啡
 

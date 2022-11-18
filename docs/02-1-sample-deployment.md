@@ -1,4 +1,4 @@
-# 一个简单的 Deployment
+# 2.1. 模仿 kubectl create 创建 Deployment 样例
 
 为了简单， 我们假定所管理的 Deployment 都是 **单容器** 的。 
 
