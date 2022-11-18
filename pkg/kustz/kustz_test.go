@@ -21,6 +21,11 @@ func Test_KustzService(t *testing.T) {
 	output(svc)
 }
 
+func Test_KustzIngress(t *testing.T) {
+	ing := kz.KubeIngress()
+	output(ing)
+}
+
 func output(v any) {
 	b, err := kubeutils.YAMLMarshal(v)
 

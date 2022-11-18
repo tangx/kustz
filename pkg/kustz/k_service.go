@@ -2,8 +2,6 @@ package kustz
 
 import (
 	"fmt"
-	"math"
-	"strconv"
 	"strings"
 
 	corev1 "k8s.io/api/core/v1"
@@ -119,12 +117,12 @@ func (p *PortString) toServiceClusterIP(value string) {
 	parts := strings.Split(value, ":")
 	switch len(parts) {
 	case 1:
-		n := p.StringToInt32(parts[0])
+		n := StringToInt32(parts[0])
 		p.Port = n
 		p.TargetPort = n
 	case 2:
-		p.Port = p.StringToInt32(parts[0])
-		p.TargetPort = p.StringToInt32(parts[1])
+		p.Port = StringToInt32(parts[0])
+		p.TargetPort = StringToInt32(parts[1])
 	}
 
 	p.Type = corev1.ServiceTypeClusterIP
@@ -139,21 +137,10 @@ func (p *PortString) toServiceNodePort(value string) {
 	case 1, 2:
 		p.toServiceClusterIP(value)
 	case 3:
-		p.NodePort = p.StringToInt32(parts[0])
-		p.Port = p.StringToInt32(parts[1])
-		p.TargetPort = p.StringToInt32(parts[2])
+		p.NodePort = StringToInt32(parts[0])
+		p.Port = StringToInt32(parts[1])
+		p.TargetPort = StringToInt32(parts[2])
 	}
 
 	p.Type = corev1.ServiceTypeNodePort
-}
-
-func (p *PortString) StringToInt32(val string) int32 {
-	i, err := strconv.Atoi(val)
-	if err != nil {
-		return 0
-	}
-	if i > math.MaxInt32 || i < math.MinInt32 {
-		return 0
-	}
-	return int32(i)
 }

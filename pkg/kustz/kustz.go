@@ -10,6 +10,7 @@ type Config struct {
 	Name      string  `json:"name"`
 	Namespace string  `json:"namespace"`
 	Service   Service `json:"service"`
+	Ingress   Ingress `json:"ingress"`
 }
 
 func NewKustzFromConfig(cfg string) *Config {
@@ -32,4 +33,9 @@ type Service struct {
 	Image    string   `json:"image"`
 	Replicas int32    `json:"replicas"`
 	Ports    []string `json:"ports"`
+}
+
+type Ingress struct {
+	Rules       []string          `json:"rules"`
+	Annotations map[string]string `json:"annotations"`
 }

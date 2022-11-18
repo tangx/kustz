@@ -11,3 +11,8 @@ service:
     - "80:8080" # cluster ip
     - "udp://!9998:8889" # 随机 nodeport
     # - "!20080:80:8080" # 指定 nodeport
+
+ingress:
+  rules:
+    - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
+    - http://api.balala.com/*
