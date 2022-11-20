@@ -26,6 +26,11 @@ func Test_KustzIngress(t *testing.T) {
 	output(ing)
 }
 
+func Test_KustzKustomize(t *testing.T) {
+	kust := kz.Kustomization()
+	output(kust)
+}
+
 func output(v any) {
 	b, err := kubeutils.YAMLMarshal(v)
 
