@@ -16,3 +16,6 @@ ingress:
   rules:
     - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
     - http://api.balala.com/*
+  annotations:
+    k1: v1
+    k2: v2

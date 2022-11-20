@@ -14,6 +14,7 @@
 
 + [2.1. 模仿 kubectl create 创建 Deployment 样例](./docs/02-1-sample-deployment.md)
 + [2.2. 定义字符串创建 Service](./docs/02-2-define-strings-to-service.md)
++ [2.3. 解析 URL 为 Ingress](./docs/02-3-parse-url-to-ingress.md)
 
 # 请一杯咖啡
 

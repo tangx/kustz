@@ -17,8 +17,9 @@ func (kz *Config) KubeIngress() *netv1.Ingress {
 			Kind:       "Ingress",
 		},
 		ObjectMeta: metav1.ObjectMeta{
-			Name:   kz.Name,
-			Labels: kz.CommonLabels(),
+			Name:        kz.Name,
+			Labels:      kz.CommonLabels(),
+			Annotations: kz.Ingress.Annotations,
 		},
 		Spec: netv1.IngressSpec{
 			Rules: rules,
@@ -51,7 +52,7 @@ func ParseIngreseRulesFromStrings(values []string, defaultService string) ([]net
 	return rules, tlss
 }
 
-type IngressRule struct {
+type IngressRuleString struct {
 	Host      string
 	Path      string
 	PathType  netv1.PathType
@@ -59,7 +60,7 @@ type IngressRule struct {
 	Service   string
 }
 
-func NewIngressRuleFromString(value string) *IngressRule {
+func NewIngressRuleFromString(value string) *IngressRuleString {
 
 	ur, err := url.Parse(value)
 	if err != nil {
@@ -74,7 +75,7 @@ func NewIngressRuleFromString(value string) *IngressRule {
 		typ = netv1.PathTypePrefix
 	}
 
-	ing := &IngressRule{
+	ing := &IngressRuleString{
 		Host:      ur.Hostname(),
 		Path:      path,
 		PathType:  typ,
@@ -85,7 +86,7 @@ func NewIngressRuleFromString(value string) *IngressRule {
 	return ing
 }
 
-func (ir *IngressRule) KubeIngressTLS() *netv1.IngressTLS {
+func (ir *IngressRuleString) KubeIngressTLS() *netv1.IngressTLS {
 	if ir.TLSSecret == "" {
 		return nil
 	}
@@ -98,7 +99,7 @@ func (ir *IngressRule) KubeIngressTLS() *netv1.IngressTLS {
 	}
 }
 
-func (ir *IngressRule) KubeIngressRule() netv1.IngressRule {
+func (ir *IngressRuleString) KubeIngressRule() netv1.IngressRule {
 
 	ing := netv1.IngressRule{
 		Host: ir.Host,
@@ -118,7 +119,7 @@ func (ir *IngressRule) KubeIngressRule() netv1.IngressRule {
 	return ing
 }
 
-func (ir *IngressRule) toKubeIngressBackend() netv1.IngressBackend {
+func (ir *IngressRuleString) toKubeIngressBackend() netv1.IngressBackend {
 
 	// srv-webapp-demo[:8080]
 	svc := ir.Service
