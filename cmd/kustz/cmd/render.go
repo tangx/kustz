@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -6,12 +6,12 @@ import (
 )
 
 var cmdRender = &cobra.Command{
-	Use:  "render",
-	Long: "render",
+	Use:   "render",
+	Short: "读取 kustz 配置， 生成 kustomize 所需文件",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		kz := kustz.NewKustzFromConfig(config)
-		kz.DumpAll()
+		kz.RenderAll()
 	},
 }
 

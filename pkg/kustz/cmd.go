@@ -10,11 +10,11 @@ import (
 //go:embed kustz.yml
 var defaultConfig string
 
-func Default() {
+func DefaultConfig() {
 	fmt.Println(defaultConfig)
 }
 
-func (kz *Config) DumpAll() error {
+func (kz *Config) RenderAll() error {
 	dep := kz.KubeDeployment()
 	ing := kz.KubeIngress()
 	svc := kz.KubeService()

@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -6,10 +6,10 @@ import (
 )
 
 var cmdDefault = &cobra.Command{
-	Use:  "default",
-	Long: "default",
+	Use:   "default",
+	Short: "在屏幕上打印 kustz 默认配置",
 	Run: func(cmd *cobra.Command, args []string) {
-		kustz.Default()
+		kustz.DefaultConfig()
 	},
 }
 

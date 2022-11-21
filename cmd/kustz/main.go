@@ -1,7 +1,9 @@
 package main
 
+import "github.com/tangx/kustz/cmd/kustz/cmd"
+
 func main() {
-	if err := Execute(); err != nil {
+	if err := cmd.Execute(); err != nil {
 		panic(err)
 	}
 }
