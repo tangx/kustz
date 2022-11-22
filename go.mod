@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/cobra v0.0.5
+	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/api v0.25.4
 	k8s.io/apimachinery v0.25.4
 	sigs.k8s.io/kustomize/v3 v3.3.1
@@ -25,7 +26,6 @@ require (
 	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/klog/v2 v2.70.1 // indirect
 	k8s.io/utils v0.0.0-20220728103510-ee6ede2d64ed // indirect
 	sigs.k8s.io/json v0.0.0-20220713155537-f223a00ba0e2 // indirect

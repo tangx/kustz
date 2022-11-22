@@ -5,8 +5,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/tangx/kustz/pkg/tokube"
+	"gopkg.in/yaml.v2"
 	corev1 "k8s.io/api/core/v1"
-	"sigs.k8s.io/yaml"
 )
 
 func (kz *Config) KubeContainer() []corev1.Container {
@@ -24,22 +24,43 @@ func (kz *Config) KubeContainer() []corev1.Container {
 }
 
 func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
-	envs := []corev1.EnvVar{}
-
-	envs = append(envs, tokube.ContainerEnv(kz.Service.Envs.Pairs)...)
+	pairs := make(map[string]string, 0)
 
 	for _, file := range kz.Service.Envs.Files {
 		b, err := os.ReadFile(file)
 		if err != nil {
 			logrus.Fatalf("read env file failed: %v", err)
 		}
-		mm := make(map[string]string, 0)
-		err = yaml.Unmarshal(b, &mm)
+		err = yaml.Unmarshal(b, &pairs)
 		if err != nil {
 			logrus.Fatalf("unmarshal env file failed: %v", err)
 		}
-
-		envs = append(envs, tokube.ContainerEnv(mm)...)
 	}
-	return envs
+
+	for k, v := range kz.Service.Envs.Pairs {
+		pairs[k] = v
+	}
+
+	return tokube.ContainerEnv(pairs)
 }
+
+// func (kz *Config) kubeContainerEnv_Error() []corev1.EnvVar {
+// 	envs := []corev1.EnvVar{}
+
+// 	envs = append(envs, tokube.ContainerEnv(kz.Service.Envs.Pairs)...)
+
+// 	for _, file := range kz.Service.Envs.Files {
+// 		b, err := os.ReadFile(file)
+// 		if err != nil {
+// 			logrus.Fatalf("read env file failed: %v", err)
+// 		}
+// 		mm := make(map[string]string, 0)
+// 		err = yaml.Unmarshal(b, &mm)
+// 		if err != nil {
+// 			logrus.Fatalf("unmarshal env file failed: %v", err)
+// 		}
+
+// 		envs = append(envs, tokube.ContainerEnv(mm)...)
+// 	}
+// 	return envs
+// }
