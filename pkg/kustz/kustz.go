@@ -29,10 +29,15 @@ func NewKustzFromConfig(cfg string) *Config {
 }
 
 type Service struct {
-	Name     string   `json:"name"`
-	Image    string   `json:"image"`
-	Replicas int32    `json:"replicas"`
-	Ports    []string `json:"ports"`
+	Name     string      `json:"name"`
+	Image    string      `json:"image"`
+	Replicas int32       `json:"replicas"`
+	Ports    []string    `json:"ports"`
+	Envs     ServiceEnvs `json:"envs,omitempty"`
+}
+type ServiceEnvs struct {
+	Pairs map[string]string `json:"pairs,omitempty"`
+	Files []string          `json:"files,omitempty"`
 }
 
 type Ingress struct {
