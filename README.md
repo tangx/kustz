@@ -16,6 +16,7 @@
 + [2.2. 定义字符串创建 Service](./docs/02-2-define-strings-to-service.md)
 + [2.3. 解析 URL 为 Ingress](./docs/02-3-parse-url-to-ingress.md)
 + [2.4. kustomize 流水线](./docs/02-4-kustomize.md)
++ [2.5. 使用 cobra 实现 kustz 命令](./docs/02-5-kustz-cli.md)
 
 # 请一杯咖啡
 
