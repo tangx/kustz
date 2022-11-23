@@ -9,10 +9,8 @@ service:
   envs:
     pairs:
       key1: value1
-      key2: value2
-    # files:
-    #   - foo.yml
-    #   - bar.yml
+    files:
+      - foo.yml
 
   ports:
     - "80:8080" # cluster ip

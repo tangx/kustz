@@ -43,24 +43,3 @@ func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
 
 	return tokube.ContainerEnv(pairs)
 }
-
-// func (kz *Config) kubeContainerEnv_Error() []corev1.EnvVar {
-// 	envs := []corev1.EnvVar{}
-
-// 	envs = append(envs, tokube.ContainerEnv(kz.Service.Envs.Pairs)...)
-
-// 	for _, file := range kz.Service.Envs.Files {
-// 		b, err := os.ReadFile(file)
-// 		if err != nil {
-// 			logrus.Fatalf("read env file failed: %v", err)
-// 		}
-// 		mm := make(map[string]string, 0)
-// 		err = yaml.Unmarshal(b, &mm)
-// 		if err != nil {
-// 			logrus.Fatalf("unmarshal env file failed: %v", err)
-// 		}
-
-// 		envs = append(envs, tokube.ContainerEnv(mm)...)
-// 	}
-// 	return envs
-// }

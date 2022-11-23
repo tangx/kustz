@@ -35,6 +35,7 @@ type Service struct {
 	Ports    []string    `json:"ports"`
 	Envs     ServiceEnvs `json:"envs,omitempty"`
 }
+
 type ServiceEnvs struct {
 	Pairs map[string]string `json:"pairs,omitempty"`
 	Files []string          `json:"files,omitempty"`
