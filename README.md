@@ -20,6 +20,8 @@
 
 # 请一杯咖啡
 
+![mp-weixin](./docs/img/mp-qrcode.png)
+
 如果你觉得这个项目还不错， 请我一杯咖啡 ☕️ 吧。
 
 ![wxpay](./img/pay/wxpay.png)
