@@ -1,4 +1,3 @@
-
 namespace: demo-demo
 name: srv-webapp-demo
 
@@ -17,7 +16,6 @@ service:
     - "udp://!9998:8889" # 随机 nodeport
     # - "!20080:80:8080" # 指定 nodeport
 
-
 ingress:
   annotations:
     k1: v1
@@ -25,3 +23,25 @@ ingress:
   rules:
     - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
     - http://api.balala.com/*
+
+
+# https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/configmapgenerator/
+configmaps:
+  envs:
+    - name: srv-webapp-demo-envs
+      files:
+        - src_name.txt
+
+# https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/secretgenerator/
+secrets:
+  literals:
+    - name: srv-webapp-demo-literals
+      files:
+        - foo.yml
+      # type: Opaque # default
+  files:
+    - name: srv-webapp-demo-files
+      files:
+      - tls.crt=catsecret/tls.crt
+      - tls.key=secret/tls.key
+      type: "kubernetes.io/tls"

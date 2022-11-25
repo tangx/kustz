@@ -7,10 +7,12 @@ import (
 )
 
 type Config struct {
-	Name      string  `json:"name"`
-	Namespace string  `json:"namespace"`
-	Service   Service `json:"service"`
-	Ingress   Ingress `json:"ingress"`
+	Name       string    `json:"name"`
+	Namespace  string    `json:"namespace"`
+	Service    Service   `json:"service"`
+	Ingress    Ingress   `json:"ingress"`
+	ConfigMaps Generator `json:"configmaps"`
+	Secrets    Generator `json:"secrets"`
 }
 
 func NewKustzFromConfig(cfg string) *Config {
@@ -44,4 +46,15 @@ type ServiceEnvs struct {
 type Ingress struct {
 	Rules       []string          `json:"rules"`
 	Annotations map[string]string `json:"annotations"`
+}
+
+type Generator struct {
+	Literals []GeneratorArgs `json:"literals,omitempty"`
+	Envs     []GeneratorArgs `json:"envs,omitempty"`
+	Files    []GeneratorArgs `json:"files,omitempty"`
+}
+type GeneratorArgs struct {
+	Name  string   `json:"name,omitempty"`
+	Files []string `json:"files,omitempty"`
+	Type  string   `json:"type,omitempty"`
 }
