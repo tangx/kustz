@@ -71,49 +71,52 @@ func generatorArgs_envs(name string, files []string) types.GeneratorArgs {
 	return g
 }
 
-func ConfigMapArgs_Env(name string, files []string) types.ConfigMapArgs {
-	return types.ConfigMapArgs{
-		GeneratorArgs: generatorArgs_envs(name, files),
-	}
-}
+func ConfigMapArgs(name string, files []string, mode GeneratorMode) types.ConfigMapArgs {
 
-func ConfigMapArgs_Files(name string, files []string) types.ConfigMapArgs {
+	switch mode {
+	case GeneratorMode_Envs:
+		return types.ConfigMapArgs{
+			GeneratorArgs: generatorArgs_envs(name, files),
+		}
+	case GeneratorMode_Literals:
+		return types.ConfigMapArgs{
+			GeneratorArgs: generatorArgs_literals(name, files),
+		}
+	}
+
 	return types.ConfigMapArgs{
 		GeneratorArgs: generatorArgs_files(name, files),
 	}
-}
-func ConfigMapArgs_Literals(name string, files []string) types.ConfigMapArgs {
-	return types.ConfigMapArgs{
-		GeneratorArgs: generatorArgs_literals(name, files),
-	}
-}
 
-func SecretArgs_Env(name string, files []string, typ string) types.SecretArgs {
+}
+func SecretArgs(name string, files []string, typ string, mode GeneratorMode) types.SecretArgs {
 	if typ == "" {
 		typ = "Opaque"
 	}
-	return types.SecretArgs{
-		GeneratorArgs: generatorArgs_envs(name, files),
-		Type:          typ,
-	}
-}
 
-func SecretArgs_Files(name string, files []string, typ string) types.SecretArgs {
-	if typ == "" {
-		typ = "Opaque"
+	switch mode {
+	case GeneratorMode_Envs:
+		return types.SecretArgs{
+			GeneratorArgs: generatorArgs_files(name, files),
+			Type:          typ,
+		}
+	case GeneratorMode_Literals:
+		return types.SecretArgs{
+			GeneratorArgs: generatorArgs_literals(name, files),
+			Type:          typ,
+		}
 	}
+
 	return types.SecretArgs{
 		GeneratorArgs: generatorArgs_files(name, files),
 		Type:          typ,
 	}
 }
 
-func SecretArgs_Liternals(name string, files []string, typ string) types.SecretArgs {
-	if typ == "" {
-		typ = "Opaque"
-	}
-	return types.SecretArgs{
-		GeneratorArgs: generatorArgs_literals(name, files),
-		Type:          typ,
-	}
-}
+type GeneratorMode string
+
+const (
+	GeneratorMode_Envs     GeneratorMode = `GeneratorMode_Envs`
+	GeneratorMode_Files    GeneratorMode = `GeneratorMode_Files`
+	GeneratorMode_Literals GeneratorMode = `GeneratorMode_Literals`
+)

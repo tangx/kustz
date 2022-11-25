@@ -18,9 +18,10 @@
 + [2.4. kustomize 流水线](./docs/02-4-kustomize.md)
 + [2.5. 使用 cobra 实现 kustz 命令](./docs/02-5-kustz-cli.md)
 
-### 第三章 扩展功能
+### 第三章 高级扩展
 
 + [3.1. 为 Container 添加环境变量](./docs/03-1-container-env-var.md)
++ [3.2. ConfigMap 和 Secret 的生成器](./docs/03-2-configmap-secret-generator.md)
 
 
 # 请一杯咖啡

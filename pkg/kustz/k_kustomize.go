@@ -17,51 +17,53 @@ func (kz *Config) Kustomization() types.Kustomization {
 			"ingress.yml",
 			"service.yml",
 		},
-		ConfigMapGenerator: kz.KustConfigMapGenerator(),
-		SecretGenerator:    kz.KustSecretGenerator(),
+		ConfigMapGenerator: kz.ConfigMaps.toConfigMapArgs(),
+		SecretGenerator:    kz.Secrets.toSecretArgs(),
 	}
 
 	return k
 }
 
-func (kz *Config) KustConfigMapGenerator() []types.ConfigMapArgs {
+// toConfigMapArgs 返回 ConfigMap 参数
+func (genor *Generator) toConfigMapArgs() []types.ConfigMapArgs {
 
 	args := []types.ConfigMapArgs{}
 
-	for _, arg := range kz.ConfigMaps.Literals {
-		arg := tokust.ConfigMapArgs_Literals(arg.Name, arg.Files)
-		args = append(args, arg)
-	}
-
-	for _, arg := range kz.ConfigMaps.Files {
-		arg := tokust.ConfigMapArgs_Files(arg.Name, arg.Files)
-		args = append(args, arg)
-	}
-	for _, arg := range kz.ConfigMaps.Envs {
-		arg := tokust.ConfigMapArgs_Env(arg.Name, arg.Files)
-		args = append(args, arg)
+	for _, data := range genor.datas() {
+		for _, garg := range data.gargs {
+			arg := tokust.ConfigMapArgs(garg.Name, garg.Files, data.mode)
+			args = append(args, arg)
+		}
 	}
 
 	return args
 }
 
-func (kz *Config) KustSecretGenerator() []types.SecretArgs {
+// toSecretArgs 返回 Secret 参数
+func (genor *Generator) toSecretArgs() []types.SecretArgs {
 
 	args := []types.SecretArgs{}
 
-	for _, arg := range kz.Secrets.Literals {
-		arg := tokust.SecretArgs_Liternals(arg.Name, arg.Files, arg.Type)
-		args = append(args, arg)
-	}
-
-	for _, arg := range kz.Secrets.Files {
-		arg := tokust.SecretArgs_Files(arg.Name, arg.Files, arg.Type)
-		args = append(args, arg)
-	}
-	for _, arg := range kz.Secrets.Envs {
-		arg := tokust.SecretArgs_Env(arg.Name, arg.Files, arg.Type)
-		args = append(args, arg)
+	for _, data := range genor.datas() {
+		for _, garg := range data.gargs {
+			arg := tokust.SecretArgs(garg.Name, garg.Files, garg.Type, data.mode)
+			args = append(args, arg)
+		}
 	}
 
 	return args
+}
+
+type GeneratorArgsData struct {
+	mode  tokust.GeneratorMode
+	gargs []GeneratorArgs
+}
+
+// datas 整合生成器数据
+func (genor *Generator) datas() []GeneratorArgsData {
+	return []GeneratorArgsData{
+		{mode: tokust.GeneratorMode_Envs, gargs: genor.Envs},
+		{mode: tokust.GeneratorMode_Files, gargs: genor.Files},
+		{mode: tokust.GeneratorMode_Literals, gargs: genor.Literals},
+	}
 }
