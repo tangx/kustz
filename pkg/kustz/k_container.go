@@ -15,12 +15,31 @@ func (kz *Config) KubeContainer() []corev1.Container {
 	}
 
 	c := corev1.Container{
-		Name:  kz.Service.Name,
-		Image: kz.Service.Image,
-		Env:   kz.kubeContainerEnv(),
+		Name:    kz.Service.Name,
+		Image:   kz.Service.Image,
+		Env:     kz.kubeContainerEnv(),
+		EnvFrom: kz.kubeContainerEnvFrom(),
 	}
 
 	return []corev1.Container{c}
+}
+
+// kubeContainerEnvFrom 定义 configmap 或 secret 数据容器变量
+// https://kubernetes.io/docs/concepts/configuration/secret/
+func (kz *Config) kubeContainerEnvFrom() []corev1.EnvFromSource {
+
+	sources := []corev1.EnvFromSource{}
+
+	// value = config-name:true
+	for _, value := range kz.Service.Envs.Secrets {
+		sources = append(sources, tokube.ParseEnvFromSource(value, "secret"))
+	}
+
+	for _, value := range kz.Service.Envs.ConfigMaps {
+		sources = append(sources, tokube.ParseEnvFromSource(value, "configmap"))
+	}
+
+	return sources
 }
 
 func (kz *Config) kubeContainerEnv() []corev1.EnvVar {

@@ -39,8 +39,10 @@ type Service struct {
 }
 
 type ServiceEnvs struct {
-	Pairs map[string]string `json:"pairs,omitempty"`
-	Files []string          `json:"files,omitempty"`
+	Pairs      map[string]string `json:"pairs,omitempty"`
+	Files      []string          `json:"files,omitempty"`
+	Secrets    []string          `json:"secrets,omitempty"`
+	ConfigMaps []string          `json:"configmaps,omitempty"`
 }
 
 type Ingress struct {
