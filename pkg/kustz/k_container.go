@@ -15,10 +15,11 @@ func (kz *Config) KubeContainer() []corev1.Container {
 	}
 
 	c := corev1.Container{
-		Name:    kz.Service.Name,
-		Image:   kz.Service.Image,
-		Env:     kz.kubeContainerEnv(),
-		EnvFrom: kz.kubeContainerEnvFrom(),
+		Name:      kz.Service.Name,
+		Image:     kz.Service.Image,
+		Env:       kz.kubeContainerEnv(),
+		EnvFrom:   kz.kubeContainerEnvFrom(),
+		Resources: kz.kubeContainerResources(),
 	}
 
 	return []corev1.Container{c}
@@ -61,4 +62,11 @@ func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
 	}
 
 	return tokube.ContainerEnv(pairs)
+}
+
+// kubeContainerResources 返回容器资源申请
+// cpu and memory request: https://kubernetes.io/zh-cn/docs/concepts/configuration/manage-resources-containers/
+// nvidia gpu request: https://help.aliyun.com/document_detail/94800.html
+func (kz *Config) kubeContainerResources() corev1.ResourceRequirements {
+	return tokube.ContainerResources(kz.Service.Resources)
 }

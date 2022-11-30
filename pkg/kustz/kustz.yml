@@ -14,11 +14,14 @@ service:
       - srv-webapp-demo-envs:true
     secrets:
       - srv-webapp-demo-envs:false
-
   ports:
     - "80:8080" # cluster ip
     - "udp://!9998:8889" # 随机 nodeport
     # - "!20080:80:8080" # 指定 nodeport
+  resources:
+    cpu: 10m/20m
+    memory: 10Mi/20Mi
+  #   nvidia.com/gpu: 1/1
 
 ingress:
   annotations:

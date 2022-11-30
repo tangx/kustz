@@ -31,11 +31,12 @@ func NewKustzFromConfig(cfg string) *Config {
 }
 
 type Service struct {
-	Name     string      `json:"name"`
-	Image    string      `json:"image"`
-	Replicas int32       `json:"replicas"`
-	Ports    []string    `json:"ports"`
-	Envs     ServiceEnvs `json:"envs,omitempty"`
+	Name      string            `json:"name"`
+	Image     string            `json:"image"`
+	Replicas  int32             `json:"replicas"`
+	Ports     []string          `json:"ports"`
+	Envs      ServiceEnvs       `json:"envs,omitempty"`
+	Resources map[string]string `json:"resources,omitempty"`
 }
 
 type ServiceEnvs struct {
