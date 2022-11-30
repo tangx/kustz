@@ -84,8 +84,8 @@ service:
 
 代码很简单， 没什么好说的。
 
-1. 在 `/pkg/tokube/container.go` 中， 函数 `ParseEnvFromSource` 解析字符串为 `corev1.EnvFromSource` 对象。
-2. 在 `/pkg/kustz/k_container.go` 中， 循环遍历 configmaps 和 secrets 获取字符串。
+1. 在 `/pkg/tokube/container_env.go` 中， 函数 `ParseEnvFromSource` 解析字符串为 `corev1.EnvFromSource` 对象。
+2. 在 `/pkg/kustz/k_container_env.go` 中， 循环遍历 configmaps 和 secrets 获取字符串。
 
 > 补充说明
 

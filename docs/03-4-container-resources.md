@@ -58,7 +58,7 @@ func (kz *Config) kubeContainerResources() corev1.ResourceRequirements {
 }
 ```
 
-第二步， 在 `/pkg/tokube/container.go` 中， 解析 map[string]string 对象， 获取资源名和值， 并返回 corev1.Resources
+第二步， 在 `/pkg/tokube/container_resources.go` 中， 解析 map[string]string 对象， 获取资源名和值， 并返回 corev1.Resources
 
 ```go
 func ContainerResources(res map[string]string) corev1.ResourceRequirements {
@@ -67,7 +67,7 @@ func ContainerResources(res map[string]string) corev1.ResourceRequirements {
 ```
 
 
-第三步， 在 `/pkg/tokube/container.go` 中分割我们定义的字符串。
+第三步， 在 `/pkg/tokube/container_resources.go` 中分割我们定义的字符串。
 
 ```go
 func toResourceQuantity(value string) (request resource.Quantity, limit resource.Quantity) {

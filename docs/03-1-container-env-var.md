@@ -105,7 +105,7 @@ func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
 
 新建了一个包 `tokube`， 这里面的函数通过 **接受** 参数返回 API 配置。 
 
-在 `/pkg/tokube/container.go` 定义了函数 `ContainerEnvs` 创建容器变量键值对。
+在 `/pkg/tokube/container_env.go` 定义了函数 `ContainerEnvs` 创建容器变量键值对。
 
 ```go
 func ContainerEnv(pairs map[string]string) []corev1.EnvVar {

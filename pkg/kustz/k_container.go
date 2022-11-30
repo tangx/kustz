@@ -15,11 +15,12 @@ func (kz *Config) KubeContainer() []corev1.Container {
 	}
 
 	c := corev1.Container{
-		Name:      kz.Service.Name,
-		Image:     kz.Service.Image,
-		Env:       kz.kubeContainerEnv(),
-		EnvFrom:   kz.kubeContainerEnvFrom(),
-		Resources: kz.kubeContainerResources(),
+		Name:          kz.Service.Name,
+		Image:         kz.Service.Image,
+		Env:           kz.kubeContainerEnv(),
+		EnvFrom:       kz.kubeContainerEnvFrom(),
+		Resources:     kz.kubeContainerResources(),
+		LivenessProbe: &corev1.Probe{},
 	}
 
 	return []corev1.Container{c}
