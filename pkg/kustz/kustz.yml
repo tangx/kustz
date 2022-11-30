@@ -22,6 +22,17 @@ service:
     cpu: 10m/20m
     memory: 10Mi/20Mi
   #   nvidia.com/gpu: 1/1
+  probes:
+    liveness:
+      action: http://:8080/healthy
+    #   httpHeaders:
+    #     token: "token123"
+    #   initialDelaySeconds: 30 
+    # readiness:
+    #   action: tcp://0.0.0.0:8080
+    # startup:
+    #   action: cat /tmp/healthy
+  
 
 ingress:
   annotations:

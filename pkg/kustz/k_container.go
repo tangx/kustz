@@ -14,13 +14,17 @@ func (kz *Config) KubeContainer() []corev1.Container {
 		kz.Service.Name = kz.Name
 	}
 
+	probes := kz.Service.Probes
+
 	c := corev1.Container{
-		Name:          kz.Service.Name,
-		Image:         kz.Service.Image,
-		Env:           kz.kubeContainerEnv(),
-		EnvFrom:       kz.kubeContainerEnvFrom(),
-		Resources:     kz.kubeContainerResources(),
-		LivenessProbe: &corev1.Probe{},
+		Name:           kz.Service.Name,
+		Image:          kz.Service.Image,
+		Env:            kz.kubeContainerEnv(),
+		EnvFrom:        kz.kubeContainerEnvFrom(),
+		Resources:      kz.kubeContainerResources(),
+		LivenessProbe:  probes.kubeProbe(probes.Liveness),
+		ReadinessProbe: probes.kubeProbe(probes.Readiness),
+		StartupProbe:   probes.kubeProbe(probes.Startup),
 	}
 
 	return []corev1.Container{c}
@@ -70,4 +74,46 @@ func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
 // nvidia gpu request: https://help.aliyun.com/document_detail/94800.html
 func (kz *Config) kubeContainerResources() corev1.ResourceRequirements {
 	return tokube.ContainerResources(kz.Service.Resources)
+}
+
+// func (cps ContainerProbes) kubeContainerLivenessProbe() *corev1.Probe {
+// 	if cps.Liveness == nil {
+// 		return nil
+// 	}
+
+// 	return cps.Liveness.kubeProbe()
+// }
+// func (cps ContainerProbes) kubeStartupLivenessProbe() *corev1.Probe {
+// 	if cps.Startup == nil {
+// 		return nil
+// 	}
+
+// 	return cps.Startup.kubeProbe()
+// }
+// func (cps ContainerProbes) kubeReadinessLivenessProbe() *corev1.Probe {
+// 	if cps.Readiness == nil {
+// 		return nil
+// 	}
+
+//		return cps.Startup.kubeProbe()
+//	}
+func (cps ContainerProbes) kubeProbe(cp *ContainerProbe) *corev1.Probe {
+	if cp == nil {
+		return nil
+	}
+	return cp.kubeProbe()
+}
+
+// kubeProbe return Kube Probe without handler
+func (cp *ContainerProbe) kubeProbe() *corev1.Probe {
+	handler := tokube.ProbeHandler(cp.Action, cp.Headers)
+	return &corev1.Probe{
+		ProbeHandler:                  handler,
+		InitialDelaySeconds:           cp.InitialDelaySeconds,
+		TimeoutSeconds:                cp.TimeoutSeconds,
+		PeriodSeconds:                 cp.PeriodSeconds,
+		SuccessThreshold:              cp.SuccessThreshold,
+		FailureThreshold:              cp.FailureThreshold,
+		TerminationGracePeriodSeconds: cp.TerminationGracePeriodSeconds,
+	}
 }

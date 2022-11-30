@@ -37,6 +37,7 @@ type Service struct {
 	Ports     []string          `json:"ports"`
 	Envs      ServiceEnvs       `json:"envs,omitempty"`
 	Resources map[string]string `json:"resources,omitempty"`
+	Probes    ContainerProbes   `json:"probes,omitempty"`
 }
 
 type ServiceEnvs struct {
@@ -63,4 +64,25 @@ type GeneratorArgs struct {
 	Name  string   `json:"name,omitempty"`
 	Files []string `json:"files,omitempty"`
 	Type  string   `json:"type,omitempty"`
+}
+
+type ContainerProbes struct {
+	Liveness  *ContainerProbe `json:"liveness,omitempty"`
+	Readiness *ContainerProbe `json:"readiness,omitempty"`
+	Startup   *ContainerProbe `json:"startup,omitempty"`
+}
+
+type ContainerProbe struct {
+	ProbeHandler                  `json:",inline"`
+	InitialDelaySeconds           int32  `json:"initialDelaySeconds,omitempty"`
+	TimeoutSeconds                int32  `json:"timeoutSeconds,omitempty"`
+	PeriodSeconds                 int32  `json:"periodSeconds,omitempty"`
+	SuccessThreshold              int32  `json:"successThreshold,omitempty"`
+	FailureThreshold              int32  `json:"failureThreshold,omitempty"`
+	TerminationGracePeriodSeconds *int64 `json:"terminationGracePeriodSeconds,omitempty"`
+}
+
+type ProbeHandler struct {
+	Action  string            `json:"action,omitempty"`
+	Headers map[string]string `json:"headers,omitempty"`
 }
