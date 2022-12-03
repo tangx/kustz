@@ -76,27 +76,6 @@ func (kz *Config) kubeContainerResources() corev1.ResourceRequirements {
 	return tokube.ContainerResources(kz.Service.Resources)
 }
 
-// func (cps ContainerProbes) kubeContainerLivenessProbe() *corev1.Probe {
-// 	if cps.Liveness == nil {
-// 		return nil
-// 	}
-
-// 	return cps.Liveness.kubeProbe()
-// }
-// func (cps ContainerProbes) kubeStartupLivenessProbe() *corev1.Probe {
-// 	if cps.Startup == nil {
-// 		return nil
-// 	}
-
-// 	return cps.Startup.kubeProbe()
-// }
-// func (cps ContainerProbes) kubeReadinessLivenessProbe() *corev1.Probe {
-// 	if cps.Readiness == nil {
-// 		return nil
-// 	}
-
-//		return cps.Startup.kubeProbe()
-//	}
 func (cps ContainerProbes) kubeProbe(cp *ContainerProbe) *corev1.Probe {
 	if cp == nil {
 		return nil

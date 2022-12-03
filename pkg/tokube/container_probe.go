@@ -78,7 +78,8 @@ func toTCPProbeHandler(action string) corev1.ProbeHandler {
 func toExecProbeHandler(action string) corev1.ProbeHandler {
 	return corev1.ProbeHandler{
 		Exec: &corev1.ExecAction{
-			Command: []string{"sh", "-c", action},
+			// Command: []string{"sh", "-c", action},
+			Command: strings.Split(action, " "),
 		},
 	}
 }

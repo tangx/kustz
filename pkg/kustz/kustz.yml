@@ -25,13 +25,13 @@ service:
   probes:
     liveness:
       action: http://:8080/healthy
-    #   httpHeaders:
-    #     token: "token123"
-    #   initialDelaySeconds: 30 
-    # readiness:
-    #   action: tcp://0.0.0.0:8080
-    # startup:
-    #   action: cat /tmp/healthy
+      headers:
+        token: "token123"
+      initialDelaySeconds: 30 
+    readiness:
+      action: tcp://0.0.0.0:8080
+    startup:
+      action: cat /tmp/healthy 
   
 
 ingress:

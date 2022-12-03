@@ -24,6 +24,7 @@
 + [3.2. ConfigMap 和 Secret 的生成器](./docs/03-2-configmap-secret-generator.md)
 + [3.3. 注入 ConfigMap 和 Secrets 到容器环境变量](./docs/03-3-container-env-from.md)
 + [3.4. 用字符串定义容器申请资源上下限](./docs/03-4-container-resources.md)
++ [3.5. 为 Container 添加健康检查方法](./docs/03-5-container-probe.md)
 
 # 请一杯咖啡
 
