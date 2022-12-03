@@ -17,14 +17,15 @@ func (kz *Config) KubeContainer() []corev1.Container {
 	probes := kz.Service.Probes
 
 	c := corev1.Container{
-		Name:           kz.Service.Name,
-		Image:          kz.Service.Image,
-		Env:            kz.kubeContainerEnv(),
-		EnvFrom:        kz.kubeContainerEnvFrom(),
-		Resources:      kz.kubeContainerResources(),
-		LivenessProbe:  probes.kubeProbe(probes.Liveness),
-		ReadinessProbe: probes.kubeProbe(probes.Readiness),
-		StartupProbe:   probes.kubeProbe(probes.Startup),
+		Name:            kz.Service.Name,
+		Image:           kz.Service.Image,
+		Env:             kz.kubeContainerEnv(),
+		EnvFrom:         kz.kubeContainerEnvFrom(),
+		Resources:       kz.kubeContainerResources(),
+		LivenessProbe:   probes.kubeProbe(probes.Liveness),
+		ReadinessProbe:  probes.kubeProbe(probes.Readiness),
+		StartupProbe:    probes.kubeProbe(probes.Startup),
+		ImagePullPolicy: tokube.ImagePullPolicy(kz.Service.ImagePullPolicy),
 	}
 
 	return []corev1.Container{c}
