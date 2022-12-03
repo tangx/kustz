@@ -5,6 +5,9 @@ service:
   name: nginx
   image: docker.io/library/nginx:alpine
   replicas: 2
+  imagePullPolicy: never
+  imagePullSecrets:
+    - aliyun-repo
   envs:
     pairs:
       key1: value1
@@ -63,3 +66,7 @@ secrets:
       - tls.crt=catsecret/tls.crt
       - tls.key=secret/tls.key
       type: "kubernetes.io/tls"
+    - name: aliyun-repo
+      files:
+        - .dockerconfigjson=docker-config.json
+      type: kubernetes.io/dockerconfigjson
