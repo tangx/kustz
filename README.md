@@ -27,6 +27,9 @@
 + [3.5. 为 Container 添加健康检查方法](./docs/03-5-container-probe.md)
 + [3.6. 3.6. 镜像拉取鉴权和策略](./docs/03-6-image-pull-policy.md)
 
+### 第四章 投入使用
++ [4.1. 使用 cobrautils 为命令添加更实用的命令参数](./docs/04-1-kustz-flags.md)
+
 # 请一杯咖啡
 
 ![mp-weixin](./docs/img/mp-qrcode.png)
