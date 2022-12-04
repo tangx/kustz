@@ -36,3 +36,5 @@ test.kustomize:
 test:
 	go test -timeout 30s -run ^$(TARGET) github.com/tangx/kustz/pkg/kustz -v -count=1
 	
+version:
+	git add . && git commit -m 'chore: release $(VERSION)' && git tag $(VERSION)
