@@ -19,12 +19,14 @@ func init() {
 	cobrautils.BindFlags(cmdRender, flags)
 }
 
+// KustzFlag 定义 flag
 type KustzFlag struct {
 	Config   string `flag:"config" usage:"kustz config" shorthand:"c"`
 	Image    string `flag:"image" usage:"image name"`
 	Replicas *int   `flag:"replicas" usage:"pod replicas number"`
 }
 
+// 初始化默认值
 var flags = &KustzFlag{
 	Config: "kustz.yml",
 }
