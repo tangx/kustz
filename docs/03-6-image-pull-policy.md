@@ -16,11 +16,45 @@
 
 2. `kubernetes.io/dockercfg`: 不太熟。
 
+在 `/pkg/tokube/pod.go` 中， 可以看到 `ImagePullSecrets` 的处理方法。 就是将字符串转为 kubernetes 的引用对象， 其它没什么好说的。
+
+```go
+func ImagePullSecrets(secrets []string) []corev1.LocalObjectReference {
+	if len(secrets) == 0 {
+		return nil
+	}
+	objs := []corev1.LocalObjectReference{}
+	for _, s := range secrets {
+		objs = append(objs, corev1.LocalObjectReference{
+			Name: s,
+		})
+	}
+	return objs
+}
+```
+
 ## 镜像拉去策略
 
 镜像拉去策略分为三种，  `Never, Always, IfNotPresent`
 
 在 `/pkg/tokube/container.go` 中， 可以看到 `ImagePullPolicy` 的处理方法。
+
+```go
+func ImagePullPolicy(s string) corev1.PullPolicy {
+	switch strings.ToLower(s) {
+	case "always":
+		return corev1.PullAlways
+	case "never":
+		return corev1.PullNever
+	case "ifnotpresent":
+		return corev1.PullIfNotPresent
+	}
+	return ""
+}
+```
+
+1. 在 `kustz.yml` 不再大小写敏感， 因为我们将值全部转为小写。
+2. 当不指定配置策略的时候， 使用默认策略。
 
 ## 使用
 
