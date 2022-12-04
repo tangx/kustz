@@ -22,7 +22,13 @@
 
 + [3.1. 为 Container 添加环境变量](./docs/03-1-container-env-var.md)
 + [3.2. ConfigMap 和 Secret 的生成器](./docs/03-2-configmap-secret-generator.md)
++ [3.3. 注入 ConfigMap 和 Secrets 到容器环境变量](./docs/03-3-container-env-from.md)
++ [3.4. 用字符串定义容器申请资源上下限](./docs/03-4-container-resources.md)
++ [3.5. 为 Container 添加健康检查方法](./docs/03-5-container-probe.md)
++ [3.6. 3.6. 镜像拉取鉴权和策略](./docs/03-6-image-pull-policy.md)
 
+### 第四章 投入使用
++ [4.1. 使用 cobrautils 为命令添加更实用的命令参数](./docs/04-1-kustz-flags.md)
 
 # 请一杯咖啡
 
