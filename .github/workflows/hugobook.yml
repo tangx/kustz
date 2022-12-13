@@ -26,6 +26,7 @@ jobs:
           env
           cp -a ./docs/* hugobook-builder/content/
           cp README.md hugobook-builder/content/_index.md
+          sed -i 's@./docs@@g' hugobook-builder/content/_index.md
 
       - name: show env
         run: |
