@@ -3,7 +3,7 @@ name: hugo-book auto build
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
