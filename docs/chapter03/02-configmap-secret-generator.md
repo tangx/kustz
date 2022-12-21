@@ -3,7 +3,7 @@
 > 大家好， 我是老麦， 一个运维小学生。
 > 今天我们通过 `kustomize` 管理 **ConfigMap** 和 **Secret**。
 
-![logo](./img/kustz-logo.jpg)
+![logo](../img/kustz-logo.jpg)
 
 上一节我们通过 `k-v` 和 `YAML文件` 为容器添加环境变量。 同时也提到了可以通过 `envFrom` 这个关键字， 直接读取 ConfigMap 或 Secret 中的 `k-v` 作为容器的环境变量。
 
@@ -71,7 +71,7 @@ type SecretArgs struct {
     2. files: 数据源。 `[target_name=]source_name`。 target_name 就是 ConfigMap 中的文件 key。 如省略， 默认与 source_name 相同。
     3. type: 类型。 Secret 专有。 取值范围参考 https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
 
-![types-of-secret](./img/types-of-secret.jpg)
+![types-of-secret](../img/types-of-secret.jpg)
 
 ```yml
 # kustz.yml

@@ -1,6 +1,6 @@
 # 3.3. [kustz] 注入 ConfigMap 和 Secrets 到容器环境变量
 
-![logo](./img/kustz-logo.jpg)
+![logo](../img/kustz-logo.jpg)
 
 > 大家好， 我是老麦。 一个运维小学生。
 

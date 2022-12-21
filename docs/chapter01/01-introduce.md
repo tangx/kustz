@@ -1,6 +1,6 @@
 # 介绍
 
-![logo](./img/kustz-logo.jpg)
+![logo](../img/kustz-logo.jpg)
 
 如果要在 Kubernets 发布一个应用， 并对外提供服务， 需要配置诸如 `Dep, Ing, Svc` 等 Config API。 
 他们之间又是通过 `Label` 组合选择而实现的 **松耦合**。
@@ -39,7 +39,7 @@ resources:
 
 换而言之， 最小的 **执行** 单元其实还是 Container， 定义了执行
 
-![pod](./img/pod.png)
+![pod](../img/pod.png)
 
 
 通过 kubectl 命令，生成的最简单的 Deployment 模版。
@@ -48,7 +48,7 @@ resources:
 $ kubectl create deployment my-nginx --image nginx:alpine --dry-run=client -o yaml
 ```
 
-![dep-pod-c](./img/dep-pod-container.jpg)
+![dep-pod-c](../img/dep-pod-container.jpg)
 
 1. 最外层**红色**是 deployment.
 2. 中间层**蓝色**是 pod.

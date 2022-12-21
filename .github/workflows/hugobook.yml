@@ -17,7 +17,7 @@ jobs:
       - name: Checkout hugo-builder
         uses: actions/checkout@v2
         with:
-          repository: tangx/hugobook-builder
+          repository: tangx/geekdoc-hugo-book-builder
           path: hugobook-builder
 
       - name: create blog
@@ -25,8 +25,9 @@ jobs:
           find ./ -maxdepth 2
           env
           cp -a ./docs/* hugobook-builder/content/
+          cp -a ./docs/config.toml hugobook-builder/
           cp README.md hugobook-builder/content/_index.md
-          sed -i 's@./docs@@g' hugobook-builder/content/_index.md
+          cd hugobook-builder/content/ && bash prepare.sh
 
       - name: show env
         run: |
@@ -41,7 +42,7 @@ jobs:
       - name: Build
         run: |
           cd hugobook-builder
-          hugo --gc --minify --cleanDestinationDir --baseURL=https://books.tangx.in/kustz/
+          hugo --gc --minify --cleanDestinationDir 
           touch public/.nojekyll
 
       - name: Pushes to another repository

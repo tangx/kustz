@@ -3,7 +3,7 @@
 > 大家好， 我是老麦。 
 > 今天我们解决镜像拉取鉴权和策略
 
-![logo](./img/kustz-logo.jpg)
+![logo](../img/kustz-logo.jpg)
 
 
 ## 镜像拉取鉴权

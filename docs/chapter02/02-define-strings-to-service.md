@@ -1,6 +1,6 @@
 # 2.2. 定义字符串创建 Service
 
-![](./img/kustz-logo.jpg)
+![](../img/kustz-logo.jpg)
 
 > 大家好， 我是老麦， 一个小运维。
 > 今天我们为 kustz 增加 service 解析功能。
@@ -58,7 +58,7 @@ spec:
 
 对于 `nodePort, port, targetPort` 这三个名词如果还不能直接回答的话， 认真记住下面这张图。
 
-![nodeport](./img/nodeport-port-targetport.png)
+![nodeport](../img/nodeport-port-targetport.png)
 
 1. 集群外部用户通过 `nodePort -> port -> targetPort`。 
 2. 集群内部用户通过 `port -> targetPort`。
