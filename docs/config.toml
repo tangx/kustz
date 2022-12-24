@@ -1,4 +1,4 @@
-baseURL = "https://books.tangx.in/kustz/"
+baseURL = "https://tangx.in/books/kustz/"
 title = "kustz 写你自己的工具"
 theme = "hugo-geekdoc"
 
