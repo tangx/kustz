@@ -3,7 +3,7 @@
 > 大家好， 我是老麦。 一个运维小学生。
 > 今天为容器添加环境变量。
 
-![logo](../img/kustz-logo.jpg)
+![logo](/docs/img/kustz-logo.jpg)
 
 再前面一章中， 我们已经完成了 `Deployment, Service, Ingress 和 Kustomization` API 的封装。 
 并通过 `cobra` 库创建了属于我们自己的 `kustz` 命令。
@@ -142,7 +142,7 @@ func (kz *Config) kubeContainerEnv_Error() []corev1.EnvVar {
 }
 ```
 
-![error](../img/env-duplicate-key.jpg)
+![error](/docs/img/env-duplicate-key.jpg)
 
 并没有测试这样的变量结构会出现什么情况， 因为这种情况就不应该出现。
 

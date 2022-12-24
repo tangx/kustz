@@ -1,3 +1,4 @@
+
 .DS_Store
 out/
 
@@ -9,3 +10,6 @@ kustomization.yml
 deployment.yml
 service.yml
 ingress.yml
+
+## book
+geekdoc-hugo-book-builder
