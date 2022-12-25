@@ -39,7 +39,7 @@ resources:
 
 换而言之， 最小的 **执行** 单元其实还是 Container， 定义了执行
 
-![pod](/docs/img/pod.png)
+![pod](./pod.png)
 
 
 通过 kubectl 命令，生成的最简单的 Deployment 模版。
@@ -48,7 +48,7 @@ resources:
 $ kubectl create deployment my-nginx --image nginx:alpine --dry-run=client -o yaml
 ```
 
-![dep-pod-c](/docs/img/dep-pod-container.jpg)
+![dep-pod-c](./dep-pod-container.jpg)
 
 1. 最外层**红色**是 deployment.
 2. 中间层**蓝色**是 pod.

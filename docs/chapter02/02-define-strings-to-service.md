@@ -58,7 +58,7 @@ spec:
 
 对于 `nodePort, port, targetPort` 这三个名词如果还不能直接回答的话， 认真记住下面这张图。
 
-![nodeport](/docs/img/nodeport-port-targetport.png)
+![nodeport](./nodeport-port-targetport.png)
 
 1. 集群外部用户通过 `nodePort -> port -> targetPort`。 
 2. 集群内部用户通过 `port -> targetPort`。

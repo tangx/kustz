@@ -71,7 +71,7 @@ type SecretArgs struct {
     2. files: 数据源。 `[target_name=]source_name`。 target_name 就是 ConfigMap 中的文件 key。 如省略， 默认与 source_name 相同。
     3. type: 类型。 Secret 专有。 取值范围参考 https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
 
-![types-of-secret](/docs/img/types-of-secret.jpg)
+![types-of-secret](./types-of-secret.jpg)
 
 ```yml
 # kustz.yml

@@ -142,7 +142,7 @@ func (kz *Config) kubeContainerEnv_Error() []corev1.EnvVar {
 }
 ```
 
-![error](/docs/img/env-duplicate-key.jpg)
+![error](./env-duplicate-key.jpg)
 
 并没有测试这样的变量结构会出现什么情况， 因为这种情况就不应该出现。
 
