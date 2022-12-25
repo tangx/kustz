@@ -3,7 +3,7 @@
 > 大家好， 我是老麦， 一个运维小学生。
 > 今天我们来给 kustz 添加资源申请字段。
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 Pod 的资源申请， 在调度策略中， 是一个重要的参数数据。 因此其重要性自然不必多说
 

@@ -3,7 +3,7 @@
 > 大家好， 我是老麦， 一个运维小学生。
 > 今天我们通过 `kustomize` 管理 **ConfigMap** 和 **Secret**。
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 上一节我们通过 `k-v` 和 `YAML文件` 为容器添加环境变量。 同时也提到了可以通过 `envFrom` 这个关键字， 直接读取 ConfigMap 或 Secret 中的 `k-v` 作为容器的环境变量。
 

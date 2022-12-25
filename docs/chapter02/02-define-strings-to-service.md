@@ -1,6 +1,6 @@
 # 2.2. 定义字符串创建 Service
 
-![](/docs/img/kustz-logo.jpg)
+![](/docs/static/logo/kustz.jpg)
 
 > 大家好， 我是老麦， 一个小运维。
 > 今天我们为 kustz 增加 service 解析功能。

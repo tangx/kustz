@@ -1,6 +1,6 @@
 # 2.4. kustomize 流水线
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 > 大家好， 我是老麦， 一个运维小学生。
 

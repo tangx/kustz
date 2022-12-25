@@ -1,5 +1,7 @@
 # 2.1. 模仿 kubectl create 创建 Deployment 样例
 
+![](/docs/static/logo/kustz.jpg)
+
 为了简单， 我们假定所管理的 Deployment 都是 **单容器** 的。 
 
 首先参考 `kubectl create` 命令

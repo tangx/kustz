@@ -2,7 +2,7 @@
 
 使用 `kustomize` 简化 kubernetes 服务部署和配置
 
-![logo](./docs/img/kustz-logo.jpg)
+![](/docs/static/logo/kustz.jpg)
 
 ## 目录
 
@@ -32,9 +32,5 @@
 
 # 请一杯咖啡
 
-![mp-weixin](./docs/img/mp-qrcode.png)
+![mp-weixin](http://tangx.in/mp/qrcode.png)
 
-如果你觉得这个项目还不错， 请我一杯咖啡 ☕️ 吧。
-
-![wxpay](./img/pay/wxpay.png)
-![alipay](./img/pay/alipay.jpg)

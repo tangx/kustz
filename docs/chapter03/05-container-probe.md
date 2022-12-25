@@ -3,7 +3,7 @@
 > 大家好， 我是老麦。
 > kustz 终于到了准生产的地步了。 今天的健康检查接口， 就为我们解决这个问题。
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 
 我们要知道， 确定一个应用能不能对外提供服务之前， 需要进行一个 **可用性** 检测。 而这个检测通常被我们称为 **健康检查**。
@@ -19,7 +19,7 @@
 
 > https://kubebyexample.com/learning-paths/application-development-kubernetes/lesson-4-customize-deployments-application-2
 
-![probes](/docs/img/container-probes.png)
+![probes](./container-probes.png)
 
 此外， Kubernetes 支持 **4种类型** 的检查方式
 

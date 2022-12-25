@@ -1,6 +1,6 @@
 # 介绍
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 如果要在 Kubernets 发布一个应用， 并对外提供服务， 需要配置诸如 `Dep, Ing, Svc` 等 Config API。 
 他们之间又是通过 `Label` 组合选择而实现的 **松耦合**。

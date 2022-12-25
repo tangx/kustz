@@ -4,7 +4,7 @@
 > 大家好， 我是老麦， 一个运维小学生。
 > 今天我们处理 Ingress， 对外提供服务。
 
-![logo](/docs/img/kustz-logo.jpg)
+![logo](/docs/static/logo/kustz.jpg)
 
 之前已经提到过， 在 `kustz.yml` 中的字段值， 要尽量做到 **见名知义**。
 
