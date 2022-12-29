@@ -1,36 +1,107 @@
-# Kustz
+# Kustz 让应用在 Kubernetes 中管理更简单
 
-使用 `kustomize` 简化 kubernetes 服务部署和配置
+![logo](/docs/static/logo/kustz.jpg)
 
-![](/docs/static/logo/kustz.jpg)
 
-## 目录
+## `kustz` 的设计思想和定义
 
-### 第一章 简介
+`kustz` 的一个核心理念就是 **语义话**， 换句话说就是具有 **可读性** 高， **见名知义**。 
 
-+ [01. 简介](./docs/01-introduce.md)
+力求 `kustz.yml` 之于 **应用**， 就像 **域名** 至于 **IP**。
 
-### 第二章 基础结构
+对于一个服务应用来说， 所有的定义都在同一个配置文件里面， 不再割裂。
 
-+ [2.1. 模仿 kubectl create 创建 Deployment 样例](./docs/02-1-sample-deployment.md)
-+ [2.2. 定义字符串创建 Service](./docs/02-2-define-strings-to-service.md)
-+ [2.3. 解析 URL 为 Ingress](./docs/02-3-parse-url-to-ingress.md)
-+ [2.4. kustomize 流水线](./docs/02-4-kustomize.md)
-+ [2.5. 使用 cobra 实现 kustz 命令](./docs/02-5-kustz-cli.md)
+从 [kustz 的完整配置][3] 中可以看到， 主要的参数都进行了 **语义化** 的处理和简化， 更贴近生活语言。
 
-### 第三章 高级扩展
+```yaml
+## 1. k8s Deployment API 定义
+  name: nginx
+  image: docker.io/library/nginx:alpine
+  replicas: 2
+  envs:
+    pairs:
+      key1: value1
+    configmaps:
+      - srv-webapp-demo-envs:true
+  resources:
+    cpu: 10m/20m
+    memory: 10Mi/20Mi
+    nvidia.com/gpu: 1/1
+  probes:
+    liveness:
+      action: http://:8080/healthy
+```
 
-+ [3.1. 为 Container 添加环境变量](./docs/03-1-container-env-var.md)
-+ [3.2. ConfigMap 和 Secret 的生成器](./docs/03-2-configmap-secret-generator.md)
-+ [3.3. 注入 ConfigMap 和 Secrets 到容器环境变量](./docs/03-3-container-env-from.md)
-+ [3.4. 用字符串定义容器申请资源上下限](./docs/03-4-container-resources.md)
-+ [3.5. 为 Container 添加健康检查方法](./docs/03-5-container-probe.md)
-+ [3.6. 3.6. 镜像拉取鉴权和策略](./docs/03-6-image-pull-policy.md)
+```yaml
+## 2. k8s Service API 定义
+  ports:
+    - "80:8080" # cluster ip
+    - "udp://!9998:8889" # 随机 nodeport
+    # - "!20080:80:8080" # 指定 nodeport
+```
 
-### 第四章 投入使用
-+ [4.1. 使用 cobrautils 为命令添加更实用的命令参数](./docs/04-1-kustz-flags.md)
+```yaml
+## 3. k8s Ingress API 定义
+ingress:
+  rules:
+    - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
+```
 
-# 请一杯咖啡
 
-![mp-weixin](http://tangx.in/mp/qrcode.png)
+既然现在的工具满足不了我们， 我们就自己抽象一层， 自己实现一个工具。
+
+## 为什么会有 `kustz`
+
+你有没有想过， 如果要在 kubernetes 集群中 **发布** 一个最基本的 **无状态服务**， 并 **提供** 给用户访问， 最少需要配置几个 `K8S Config API` ?
+
+1. `Deployment`: 管理应用本身。 
+2. `Service`: 管理应用在集群内的访问地址， 也是应用在在集群累的负载均衡器。
+3. `Ingress`: 管理应用对外暴露的入口， 通俗点说， 就是 URL。
+
+前三个是最基本的的 API。 
+
+如果还有配置文件或或者其他密钥管理， 可能你还需要。
+
+4. `Secret` / `ConfigMap`: 管理应用配置。
+
+这些配置文件的存在， 本身都独立存在， 并没什么关系。
+
+为了让他们在一起， 你还需要定义 `Label` 信息， 并且通过 `LabelSelector` 将他们组合起来。 
+
+只是将这些 `Config API` 文件组合在一起， 都是一件麻烦事情了。 这还不包括各个 `Config API` 本身的复杂结构， 以及不同版本之间的差别。
+
+社区也注意到这件事情了， 有很多工具帮我们组合管理， 例如我们今天要说的 [`Kustomize`][2]。 
+
+除此之外， 还有微软和阿里云一起搞的 [`Open Application Model`(简称 `OAM`)][1]。
+
+### Kustomize
+
+下面是 `kustomize` 最基本的配置文件 `kustomization.yaml`
+
+```yaml
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: demo-demo
+resources:
+  - deployment.yml
+  - service.yml
+  - ingress.yml
+configMapGenerator:
+- name: my-application-properties
+  files:
+  - application.properties
+```
+
+更多参数， 可以到 [`kustomize` 官网][2] 查看。 
+
+可以看到 `kustomize` 也只是帮我们完成了文件的组合， 并没有解决 `Config API` 复杂结构的问题。
+
+
+## 引用
+
+[1]: https://oam.dev/
+[2]: https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/
+[3]: https://github.com/tangx/kustz/blob/main/pkg/kustz/kustz.yml
+[4]: https://tangx.in/books/kustz/chapter01/01-introduce/
 
