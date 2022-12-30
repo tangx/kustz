@@ -47,6 +47,35 @@ ingress:
     - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
 ```
 
+### 说明: ConfigMap 配置说明
+
+由于默认的 `kustomize` 的生成器支持 `k=v` 格式， 不支持多行变量。  因此使用 liternals 实现。
+
+> 注意， 变量文件值支持 `YAML` 格式文件。
+
+```yaml
+# kustz.yml
+# https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/secretgenerator/
+secrets: # 或 configmaps
+  literals:
+    - name: srv-webapp-demo-literals
+      files:
+        - foo.yml
+      # type: Opaque # default
+```
+
+变量文件
+
+```yaml
+## foo.yaml
+JAVA_HOME: /opt/java/jdk
+JAVA_TOOL_OPTIONS: -agentlib:hprof
+HTTPS_CERT: |
+  ---- RSA ----
+  asdflalsdjflasdjfl
+  ---- RSA END ----
+```
+
 
 既然现在的工具满足不了我们， 我们就自己抽象一层， 自己实现一个工具。
 

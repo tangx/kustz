@@ -1,2 +1,6 @@
 JAVA_HOME: /opt/java/jdk
 JAVA_TOOL_OPTIONS: -agentlib:hprof
+HTTPS_CERT: |
+  ---- RSA ----
+  asdflalsdjflasdjfl
+  ---- RSA END ----
