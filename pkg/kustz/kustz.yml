@@ -30,12 +30,25 @@ service:
       action: http://:8080/healthy
       headers:
         token: "token123"
-      initialDelaySeconds: 30 
+      initialDelaySeconds: 30
     readiness:
       action: tcp://0.0.0.0:8080
     startup:
-      action: cat /tmp/healthy 
-  
+      action: cat /tmp/healthy
+
+### dns config for pod
+### https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
+# dns:
+#   config:
+#     nameservers:
+#       - 10.133.10.55  # align internat dns
+#     searches:
+#       - ns1.svc.cluster.local
+#       - my.dns.search.suffix
+#     options:
+#       - ndots:2
+#       - edns0
+#   policy: None
 
 ingress:
   annotations:

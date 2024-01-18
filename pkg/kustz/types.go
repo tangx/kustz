@@ -13,6 +13,7 @@ type Config struct {
 	Ingress    Ingress   `json:"ingress"`
 	ConfigMaps Generator `json:"configmaps"`
 	Secrets    Generator `json:"secrets"`
+	DNS        DNS       `json:"dns"`
 }
 
 func NewKustzFromConfig(cfg string) *Config {
