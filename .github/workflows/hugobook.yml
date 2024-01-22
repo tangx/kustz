@@ -1,4 +1,4 @@
-name: hugo-book auto build 
+name: hugo-book auto build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v1
         with:
@@ -41,7 +41,7 @@ jobs:
       - name: Build
         run: |
           cd hugobook-builder
-          hugo --gc --minify --cleanDestinationDir 
+          hugo --gc --minify --cleanDestinationDir
           touch public/.nojekyll
 
       - name: Pushes to another repository
