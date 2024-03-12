@@ -32,9 +32,12 @@ func toHTTPProbeHandler(action string, headers map[string]string) corev1.ProbeHa
 		panic(err)
 	}
 
+	// convert to upper case
+	schema := strings.ToUpper(ur.Scheme)
+
 	handler := corev1.ProbeHandler{
 		HTTPGet: &corev1.HTTPGetAction{
-			Scheme:      corev1.URIScheme(ur.Scheme),
+			Scheme:      corev1.URIScheme(schema),
 			Host:        ur.Hostname(),
 			Port:        intstr.Parse(ur.Port()),
 			Path:        ur.Path,
