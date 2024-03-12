@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/sirupsen/logrus"
+	"github.com/tangx/kustz/pkg/kubeutils"
 	"github.com/tangx/kustz/pkg/tokube"
-	"gopkg.in/yaml.v2"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -57,7 +57,8 @@ func (kz *Config) kubeContainerEnv() []corev1.EnvVar {
 		if err != nil {
 			logrus.Fatalf("read env file failed: %v", err)
 		}
-		err = yaml.Unmarshal(b, &pairs)
+		// err = yaml.Unmarshal(b, &pairs)
+		err = kubeutils.YamlPkgUnmarshal(b, &pairs)
 		if err != nil {
 			logrus.Fatalf("unmarshal env file failed: %v", err)
 		}

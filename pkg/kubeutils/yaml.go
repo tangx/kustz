@@ -3,23 +3,32 @@ package kubeutils
 import (
 	"os"
 
-	"sigs.k8s.io/yaml"
+	pkgyaml "gopkg.in/yaml.v3"
+	sigyaml "sigs.k8s.io/yaml"
 )
 
-func YAMLMarshal(v any) ([]byte, error) {
-	b, err := yaml.Marshal(v)
+func YamlSigMarshal(v any) ([]byte, error) {
+	b, err := sigyaml.Marshal(v)
 	return b, err
 }
 
-func YAMLUnmarshal(data []byte, v interface{}) error {
+func YamlSigUnmarshal(data []byte, v interface{}) error {
 
-	return yaml.Unmarshal(data, v)
+	return sigyaml.Unmarshal(data, v)
 }
 
 func WriteYamlFile(name string, data any) error {
-	b, err := YAMLMarshal(data)
+	b, err := YamlSigMarshal(data)
 	if err != nil {
 		return err
 	}
 	return os.WriteFile(name, b, os.ModePerm)
+}
+
+func YamlPkgMarshal(v any) ([]byte, error) {
+	b, err := pkgyaml.Marshal(v)
+	return b, err
+}
+func YamlPkgUnmarshal(data []byte, v interface{}) error {
+	return pkgyaml.Unmarshal(data, v)
 }

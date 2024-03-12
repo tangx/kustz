@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"gopkg.in/yaml.v2"
+	"github.com/tangx/kustz/pkg/kubeutils"
 	"sigs.k8s.io/kustomize/v3/pkg/types"
 )
 
@@ -14,7 +14,7 @@ func marshalYaml(file string, out any) error {
 		return err
 	}
 
-	err = yaml.Unmarshal(b, out)
+	err = kubeutils.YamlPkgUnmarshal(b, out)
 	return err
 }
 

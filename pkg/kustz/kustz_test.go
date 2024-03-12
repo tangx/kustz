@@ -12,7 +12,7 @@ var (
 )
 
 func Test_YamlMarshal(t *testing.T) {
-	b, err := kubeutils.YAMLMarshal(kz)
+	b, err := kubeutils.YamlPkgMarshal(kz)
 	if err != nil {
 		panic(err)
 	}
@@ -41,7 +41,7 @@ func Test_KustzKustomize(t *testing.T) {
 }
 
 func output(v any) {
-	b, err := kubeutils.YAMLMarshal(v)
+	b, err := kubeutils.YamlSigMarshal(v)
 
 	if err != nil {
 		panic(err)
