@@ -13,8 +13,8 @@ func (kz *Config) KubePod() corev1.PodTemplateSpec {
 		Spec: corev1.PodSpec{
 			Containers:       kz.KubeContainer(),
 			ImagePullSecrets: toImagePullSecrets(kz.Service.ImagePullSecrets),
-			DNSConfig:        toPodDNSConfig(&kz.DNS),
-			DNSPolicy:        toDNSPolicy(&kz.DNS),
+			DNSConfig:        toPodDNSConfig(kz.DNS),
+			DNSPolicy:        toDNSPolicy(kz.DNS),
 		},
 	}
 }

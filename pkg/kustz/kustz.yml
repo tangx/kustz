@@ -1,3 +1,5 @@
+apiVersion: kustz/v1
+
 namespace: demo-demo
 name: srv-webapp-demo
 
@@ -41,7 +43,7 @@ service:
 # dns:
 #   config:
 #     nameservers:
-#       - 10.133.10.55  # align internat dns
+#       - 10.133.10.55
 #     searches:
 #       - ns1.svc.cluster.local
 #       - my.dns.search.suffix
@@ -57,7 +59,6 @@ ingress:
   rules:
     - http://api.example.com/ping?tls=star-example-com&svc=srv-webapp-demo:8080
     - http://api.balala.com/*
-
 
 # https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/configmapgenerator/
 configmaps:
@@ -76,8 +77,8 @@ secrets:
   files:
     - name: srv-webapp-demo-files
       files:
-      - tls.crt=catsecret/tls.crt
-      - tls.key=secret/tls.key
+        - tls.crt=catsecret/tls.crt
+        - tls.key=secret/tls.key
       type: "kubernetes.io/tls"
     - name: aliyun-repo
       files:

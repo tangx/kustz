@@ -6,14 +6,20 @@ import (
 	"github.com/tangx/kustz/pkg/kubeutils"
 )
 
+const (
+	APIVersion = "kustz/v1"
+)
+
 type Config struct {
+	Metadata `json:",inline"`
+
 	Name       string    `json:"name"`
 	Namespace  string    `json:"namespace"`
 	Service    Service   `json:"service"`
-	Ingress    Ingress   `json:"ingress"`
-	ConfigMaps Generator `json:"configmaps"`
-	Secrets    Generator `json:"secrets"`
-	DNS        DNS       `json:"dns"`
+	Ingress    Ingress   `json:"ingress,omitempty"`
+	ConfigMaps Generator `json:"configmaps,omitempty"`
+	Secrets    Generator `json:"secrets,omitempty"`
+	DNS        *DNS      `json:"dns,omitempty"`
 }
 
 func NewKustzFromConfig(cfg string) *Config {
@@ -26,6 +32,10 @@ func NewKustzFromConfig(cfg string) *Config {
 	err = kubeutils.YAMLUnmarshal(b, kz)
 	if err != nil {
 		panic(err)
+	}
+
+	if kz.Metadata.APIVersion == "" {
+		kz.Metadata.APIVersion = APIVersion
 	}
 
 	return kz
