@@ -19,6 +19,9 @@ func (kz *Config) Kustomization() types.Kustomization {
 		},
 		ConfigMapGenerator: kz.ConfigMaps.toConfigMapArgs(),
 		SecretGenerator:    kz.Secrets.toSecretArgs(),
+		GeneratorOptions: &types.GeneratorOptions{
+			DisableNameSuffixHash: true,
+		},
 	}
 
 	return k

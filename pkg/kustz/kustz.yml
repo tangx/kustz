@@ -65,7 +65,7 @@ configmaps:
   envs:
     - name: srv-webapp-demo-envs
       files:
-        - foo.yml
+        - configmap.env
 
 # https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/secretgenerator/
 secrets:
